@@ -1,3 +1,5 @@
+// Copyright skoved
+
 package env
 
 import (
