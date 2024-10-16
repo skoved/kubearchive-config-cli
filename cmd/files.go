@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/skoved/kubearchive-config-cli/pkg/env"
+	yFiles "github.com/skoved/kubearchive-config-cli/pkg/files"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -35,8 +36,8 @@ func listFiles(cmd *cobra.Command, args []string) {
 		fmt.Fprintln(os.Stderr, "Could not open directory:", dataDir)
 	}
 	for _, file := range files {
-		// TODO: filter for .yaml files that contain a KubeArchiveConfig
-		if !file.IsDir() {
+		if !file.IsDir() && yFiles.IsYaml(fmt.Sprintf("%s/%s", dataDir, file.Name())) {
+			// TODO: Replace with logic to select a yaml file to apply
 			fmt.Println(file.Name())
 		}
 	}
